@@ -1,14 +1,24 @@
-import { _decorator, Component, Node } from 'cc';
+import { _decorator, AudioClip, Component, Node, AudioSource } from 'cc';
 const { ccclass, property } = _decorator;
 
 @ccclass('BirdAudio')
 export class BirdAudio extends Component {
-    start() {
+    
+    @property({
+        type: [AudioClip]
+    })
+    public clips: AudioClip[] = [];
 
-    }
+    @property({
+        type: AudioSource
+    })
+    public audioSource: AudioSource = null!;
 
-    update(deltaTime: number) {
-        
+    onAudioQueue(index: number){
+        let clip: AudioClip = this.clips[index];
+
+        this.audioSource.playOneShot(clip);
     }
 }
-
+
+
